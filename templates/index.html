@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Air Writing PRO</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0f0f0f;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #1a1a1a;
+      border-bottom: 1px solid #2a2a2a;
+    }
+
+    header h1 {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #e0e0e0;
+    }
+
+    header h1 span { color: #7c6cfc; }
+
+    .badge {
+      background: #7c6cfc22;
+      color: #a89cfc;
+      border: 1px solid #7c6cfc55;
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 12px;
+    }
+
+    .main {
+      display: flex;
+      gap: 24px;
+      padding: 28px;
+      width: 100%;
+      max-width: 1100px;
+      align-items: flex-start;
+    }
+
+    .video-wrap {
+      flex: 1;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #2a2a2a;
+      position: relative;
+      background: #000;
+    }
+
+    .video-wrap img {
+      width: 100%;
+      display: block;
+    }
+
+    .video-wrap .loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #111;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .sidebar {
+      width: 220px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .card {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .card h3 {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #666;
+      margin-bottom: 12px;
+    }
+
+    .gesture-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: #bbb;
+    }
+
+    .gesture-icon {
+      font-size: 20px;
+      width: 32px;
+      text-align: center;
+    }
+
+    .gesture-label strong {
+      display: block;
+      color: #e0e0e0;
+      font-size: 13px;
+    }
+
+    .gesture-label span {
+      font-size: 11px;
+      color: #666;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover { opacity: 0.85; }
+
+    .btn-clear {
+      background: #2a1a1a;
+      color: #e07070;
+      border: 1px solid #4a2a2a;
+    }
+
+    .tip {
+      font-size: 12px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .tip b { color: #888; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Air <span>Writing</span> PRO</h1>
+  <span class="badge">MediaPipe + OpenCV</span>
+</header>
+
+<div class="main">
+  <div class="video-wrap">
+    <div class="loading" id="loading">Starting camera...</div>
+    <img id="feed" src="/video" alt="Camera feed" onload="document.getElementById('loading').style.display='none'">
+  </div>
+
+  <div class="sidebar">
+    <div class="card">
+      <h3>Gestures</h3>
+      <div class="gesture-row">
+        <div class="gesture-icon">☝️</div>
+        <div class="gesture-label">
+          <strong>Draw</strong>
+          <span>Index finger only</span>
+        </div>
+      </div>
+      <div class="gesture-row">
+        <div class="gesture-icon">✌️</div>
+        <div class="gesture-label">
+          <strong>Hover</strong>
+          <span>Index + middle up</span>
+        </div>
+      </div>
+      <div class="gesture-row">
+        <div class="gesture-icon">🤏</div>
+        <div class="gesture-label">
+          <strong>Erase</strong>
+          <span>Pinch thumb + index</span>
+        </div>
+      </div>
+      <div class="gesture-row">
+        <div class="gesture-icon">👆</div>
+        <div class="gesture-label">
+          <strong>Color</strong>
+          <span>Point at top-right circles</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Controls</h3>
+      <button class="btn btn-clear" onclick="clearCanvas()">🗑 Clear Canvas</button>
+    </div>
+
+    <div class="card">
+      <h3>Tips</h3>
+      <p class="tip">
+        <b>Good lighting</b> helps hand detection.<br><br>
+        <b>Keep hand</b> within camera frame.<br><br>
+        <b>Slow strokes</b> give smoother lines.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  function clearCanvas() {
+    fetch('/clear').then(() => console.log('Canvas cleared'));
+  }
+</script>
+
+</body>
+</html>
