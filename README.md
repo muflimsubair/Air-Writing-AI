@@ -18,6 +18,17 @@ This project allows users to write in the air using hand gestures and converts i
 
 \- Smooth stroke rendering
 
+## 📸 Screenshots
+
+### Drawing in Air
+![Drawing](screenshots/drawing.png)
+
+### UI View
+![UI](screenshots/ui.png)
+
+### Demo
+![Demo](screenshots/demo1.png)
+
 
 
 \## 🛠 Tech Stack
